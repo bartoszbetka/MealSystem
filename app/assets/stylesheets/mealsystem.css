@@ -1,0 +1,65 @@
+body {
+  background-color: #99CCCC;
+}
+
+.icon-github-circled-alt2 {
+  opacity: 1;
+}
+
+.icon-github-circled-alt2:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.glyphicon-cog:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.glyphicon-collapse-up:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.glyphicon-collapse-down:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.order:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.glyphicon-plus:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.icon-facebook-squared {
+  opacity: 1;
+}
+
+.icon-facebook-squared:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+#total-sum {
+  margin-top: 5px;
+  text-align: right;
+}
+
+#collapse {
+  margin-left: 5px;
+}
+
+a.titlelink {
+  text-decoration: none;
+  color: #fff;
+}
+
+a.titlelinkicon {
+  text-decoration: none;
+  color: #000;
+}

@@ -1,0 +1,33 @@
+<div ng-controller="NavCtrl">
+	<div class="nav nav-tabs">
+		<ul class="nav nav-tabs navbar-left">
+  			<li role="presentation"><a href="#" class="titlelink">Home</a></li>
+  			<li role="presentation"><a href="#!/active" class="titlelink">Active</a></li>
+  			<li role="presentation"><a href="#!/history" class="titlelink">History</a></li>
+		</ul>
+		<ul class="nav nav-tabs navbar-right">
+ 			<li role="presentation" ng-show="!auth">
+ 				<a class="titlelinkicon" >
+ 					<i class="icon-github-circled-alt2" ng-click="authNetwork('github')"></i>
+ 				</a>
+ 			</li>
+			<li role="presentation" ng-show="!auth">
+				<a class="titlelinkicon">
+					<i class="icon-facebook-squared"  ng-click="authNetwork('facebook')"></i>
+				</a>
+			</li>
+			<li role="presentation" ng-show="auth">
+				<a class="titlelink" >
+					Sign as: <b>{{authName}}</b>
+					<span style="margin-right: 5px;"></span>
+					<span class="glyphicon glyphicon-user"></span>
+				</a>
+			</li>
+			<li role="presentation" ng-show="auth">
+				<a href="/sign_out" class="titlelink">
+					<span class="glyphicon glyphicon-off"></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

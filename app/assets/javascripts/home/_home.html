@@ -1,0 +1,114 @@
+<div class="page-header">
+	<h2>Today Orders</h2>
+</div>
+<div class= "row">
+	<div class="col-md-6 col-md-offset-5">
+		<form name="restaurantForm"ng-submit="addOrder()" ng-show="auth" class="margin">
+			<div class="input-group">
+				<input type="text" name="restaurantName" class="form-control" placeholder="Restaurant Name" ng-model="restaurantName" ng-pattern="regexRestaurant" required>
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-primary">Add order</button>
+				</div>
+			</div>
+			<span style="color: red;">
+				<span ng-show="restaurantForm.restaurantName.$touched &&restaurantForm.restaurantName.$invalid">The restaurant name should contain only letters and number.</span>
+			</span>
+		</form>
+	</div>
+</div>
+<div style="margin-top: 30px;"></div>
+<div ng-repeat = "order in orders | orderBy:'-created_at'">
+	<div class= "row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class= "row">
+				<div class="col-md-8 col-md-offset-4">	
+					<div style="text-align: right;">Added by:{{order.user.name}}</div>
+				</div>
+				<div style="margin-top: 25px;"></div>
+				<div class="panel panel-default">
+					<div class="panel-heading" >
+						<h3 class="panel-title">
+							<div class="row">
+								<div class="col-md-6" ng-click = "showItem = ! showItem" >
+									<span class="order">Restaurant: <b>{{order.restaurantName}}</b></span>
+								</div>
+								<div class="col-md-6">
+									<div class="row">
+										<div class="col-md-12">
+											<div style = "text-align: right;">
+												status:<b>{{order.order_status.status}}</b>
+												<span style="margin-left: 5px;">
+													<span class="glyphicon glyphicon-collapse-down"  ng-click = "showItem = ! showItem" style="cursor:pointer;" ng-hide="showItem"></span>
+													<span class="glyphicon glyphicon-collapse-up"
+																	 ng-click = "showItem = ! showItem" style="cursor:pointer;" ng-show="showItem"></span>
+												</span>
+												<span class="glyphicon glyphicon-cog" ng-show="auth" ng-click="showStatus = ! showStatus" style="cursor:pointer;"></span>
+												<div ng-show="showStatus">
+													<select name="singleSelect" ng-model="data.singleSelect" ng-click = "statuss(order)">
+												      <option value="1" >In Progress</option>
+												      <option value="2" >Ordered</option>
+												      <option value="3" >Delivered</option>
+												      <option value="4" >Finalized</option>
+												    </select><br>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div id="total-sum" name="$index">
+												Total Price:<b>{{order.totalPrice | number:2}} zł</b>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</h3>
+					</div>
+					<div class="panel-body" ng-show="showItem">
+						<span class="glyphicon glyphicon-plus" ng-show="auth" ng-click= "showForm = ! showForm"></span>
+						<div style="margin-bottom: 10px;"></div>
+							<div class="row" ng-show="showForm">
+								<div class="col-md-12">
+									<div class="row">
+										<form name="mealForm" ng-submit="addMeal(order)" novalidate>
+											<div class="col-md-8">
+												<div class="form-group">
+  													<ng-form name="mealFieldForm{{index}}">
+   														<input type="text" class="form-control" name="dish" placeholder="Meal" ng-model="order.meals.dishName" ng-pattern="regexMealName" required>
+	    												<input type="text" class="form-control" name="price" placeholder="Price" ng-model="order.meals.price" ng-pattern="regexMealPrice" required>
+    													<span ng-show="mealFieldForm{{index}}.dish.$touched && mealFieldForm{{index}}.dish.$invalid">Meal should contain only letters.</span>
+	  													<span ng-show="mealFieldForm{{index}}.price.$touched && mealFieldForm{{index}}.price.$invalid"><p>Price should contain only numbers.</p></span>
+													</ng-form>
+  												</div>
+											</div>
+											<div class="col-md-4">
+												<button type="submit" ng-click="addMeal(order)" class="btn btn-primary">Add meal</button> 
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<div id="order_{{$index}}"ng-repeat="meal in order.meals">
+								<ul class="list-group">
+    								<li class="list-group-item">
+    									<div class="row">
+    										<div class="col-md-4">
+    											<span style="text-align: left;">Meal:<b>{{meal.name}}</b></span>
+    										</div>
+    										<div class="col-md-4">
+    											<span style="text-align: center;">Price:<b>{{meal.price}} zł</b></span>
+    										</div>
+											<div class="col-md-4">
+     											<span style="text-align: center;"><b>{{meal.user.name}}</b></span>
+											</div>
+   									 	</div>
+   									</li>
+  								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
